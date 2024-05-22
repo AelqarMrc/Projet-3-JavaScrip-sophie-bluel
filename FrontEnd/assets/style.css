@@ -225,12 +225,34 @@ li:hover {
 	text-align: center;
 	margin-top: 4em;
 }
+.modale{
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: center;
+	gap: 2.5em;
+	margin: 0;
+}
+
+#editLink{
+	font-size: 1.2em;
+	display: flex;
+	flex-direction: row;
+	align-items: self-end;
+	gap: 1em;
+	text-decoration: none;
+	color: black;
+}
+
+svg{
+	width: 1.5em;
+	
+}
 
 .filterGallery {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	padding-bottom: 4.5em;
 	padding-top: 3.5em;
 	width: 100%;
 }
@@ -239,7 +261,7 @@ li:hover {
 	display: flex;
 	justify-content: center;
 	gap: 0.7em;
-	width: 100%;
+	width: auto;
 }
 
 .filterBtn button {
@@ -269,6 +291,7 @@ li:hover {
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
+	padding-top: 4.5em;
 }
 
 .gallery img {
@@ -279,6 +302,10 @@ li:hover {
 
 .hide {
 	display: none;
+}
+
+.flex{
+	display: flex;
 }
 
 #contact {
