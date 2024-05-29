@@ -33,6 +33,7 @@ export default class MyClass extends APIClass{
             , edit = document.querySelector("#editLink")
             , editModeBar = document.querySelector("#editModeBar")
             , modal = document.querySelector("#modal1")
+            , modal2 = document.querySelector("#modal2")
             , margin = document.querySelector("header")  
             
             
@@ -58,9 +59,18 @@ export default class MyClass extends APIClass{
                 }
                 edit.addEventListener('click', e =>  {
                     modal.classList.remove('hide');
-                    
-                    
                 });
+                
+                const body = document.querySelector('body');
+                    body.addEventListener('click', e => {
+                    if (e.target === modal) {
+                        modal.classList.add('hide');
+                    }
+                    if (e.target === modal2) {
+                        modal2.classList.add('hide');
+                    }
+                });
+                
                 
             }
             else {

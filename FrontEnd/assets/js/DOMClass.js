@@ -184,6 +184,7 @@ export default class DOMClass {
             modal1.classList.remove("hide");
             let modal2 = document.querySelector("#modal2");
             modal2.classList.add("hide");
+
         });
 
 
