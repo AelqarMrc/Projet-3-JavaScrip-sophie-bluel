@@ -134,18 +134,18 @@ table {
 	border-spacing: 0;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 /** end reset css**/
 body {
 	max-width: 1140px;
 	margin: auto;
 	font-family: 'Work Sans';
 	font-size: 14px;
-}
-
-header {
-	display: flex;
-	justify-content: space-between;
-	margin: 50px 0
 }
 
 section {
@@ -175,17 +175,55 @@ h2 {
 	color: #1D6154
 }
 
+.grey-line {
+    border: none;
+    border-top: 1px solid grey; /* Ceci crée le trait gris */
+    margin: 20px 0; /* Ceci ajoute de l'espace au-dessus et en dessous du trait */
+	height: 1px;
+	width: 25em;
+}
+
+/* Edit Mode Bar */
+
+#editModeBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4em; 
+    background-color: black;
+    color: white; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; 
+
+}
+
+#editModeBar svg {
+    margin-right: 10px;
+}
+
+
+
+/* Header */
+
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 4em 0
+}
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+	
 }
 
 nav li {
 	padding: 0 1.5em;
 	font-size: 1.2em;
-	
+
 }
 
 
@@ -193,6 +231,8 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+/* Main */
 
 #introduction {
 	display: flex;
@@ -221,33 +261,14 @@ li:hover {
 	margin-bottom: 0.5em;
 }
 
+/* Portfolio */
+
 #portfolio h2 {
 	text-align: center;
 	margin-top: 4em;
 }
-.modale{
-	display: flex;
-	flex-direction: row;
-	align-items: baseline;
-	justify-content: center;
-	gap: 2.5em;
-	margin: 0;
-}
 
-#editLink{
-	font-size: 1.2em;
-	display: flex;
-	flex-direction: row;
-	align-items: self-end;
-	gap: 1em;
-	text-decoration: none;
-	color: black;
-}
 
-svg{
-	width: 1.5em;
-	
-}
 
 .filterGallery {
 	display: flex;
@@ -299,14 +320,40 @@ svg{
 	padding-bottom: 0.5em;
 }
 
+/* First modale*/
 
-.hide {
-	display: none;
-}
-
-.flex{
+.modale {
 	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: center;
+	gap: 2.5em;
+	margin: 0;
 }
+
+#editLink {
+	font-size: 1.2em;
+	display: flex;
+	flex-direction: row;
+	align-items: self-end;
+	gap: 1em;
+	text-decoration: none;
+	color: black;
+}
+
+svg {
+	width: 1.5em;
+
+}
+
+.hide {						/* hide CLASS */
+	display: none !important;
+}
+.NoOpacity {				/* NoOpacity CLASS */
+	opacity: 0 !important;
+}
+
+/* Form */
 
 #contact {
 	width: 50%;
@@ -316,7 +363,7 @@ svg{
 #login {
 	width: 40%;
 	margin: auto;
-	margin-top:  10em;
+	margin-top: 10em;
 	margin-bottom: 15em;
 }
 
@@ -381,8 +428,54 @@ input[type="submit"] {
 	text-decoration: underline;
 }
 
+/* Second Modal */
+
+.modal{
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.modalWrapper{
+    width: 30em; 
+    height: 35em; 
+    background-color: white;
+	display: flex; 
+	flex-direction: column;
+	align-items: center;	
+	gap: 1em; 
+	margin: 0; 
+	padding: 1em;
+	border-radius: 10px;  
+}
+
+.modalWrapper h3{
+	font-size: 1.5em;
+	margin-top: 1.5em;
+	margin-bottom: 1em;
+}
 
 
+.modalWrapper input {
+	padding: 0.5em;
+	gap: 1em;
+	margin: 0;
+	border: none;
+}
+.modalWrapper form{
+	padding: 0 2.5em;
+}
+#imageContainer{
+	padding-left: 2em;
+}
+
+/* Footer */
 
 footer nav ul {
 	display: flex;

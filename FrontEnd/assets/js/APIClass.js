@@ -50,11 +50,16 @@ export default class APIClass extends DOMClass {
     }
 
     getLogged(param) {
-        
-        
         this.renderLogin()
         this.loginPage()
 
+    }
+
+    getModaleCard(param) {
+        fetch(this.#works_endpoint)
+            .then(response => response.json())
+            .then(this.galleryModal)
+            .catch(error => console.log(error));
     }
                 
 }

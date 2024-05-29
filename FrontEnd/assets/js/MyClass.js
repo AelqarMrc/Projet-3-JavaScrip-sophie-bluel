@@ -22,9 +22,56 @@ export default class MyClass extends APIClass{
         this.getCategories()
         this.getFilter()
         this.getLogged()
+        this.test()
+        this.getModaleCard()
+        // this.addPhotosModal()
     }
     
-    
-    
+    test = () => {
+        document.addEventListener("DOMContentLoaded", function() {
+            const token = localStorage.getItem('token')
+            , edit = document.querySelector("#editLink")
+            , editModeBar = document.querySelector("#editModeBar")
+            , modal = document.querySelector("#modal1")
+            , margin = document.querySelector("header")  
+            
+            
+            
+            if (token) {
+                const loginButton = document.querySelector('.loginBtn');
+                if (loginButton) {
+                    loginButton.textContent = 'logout';
+                    const filter = document.querySelector('.filterGallery');
+                    filter.classList.add('hide');
+                    editModeBar.classList.remove('hide');
+                    margin.style.marginTop = '6.5em';
+                    
+                    loginButton.onclick = function() {
+                        if (loginButton.textContent === 'login') {
+                        }
+                        localStorage.removeItem('token');
+                        window.location.href = 'index.html';
+                        loginButton.textContent = 'login';
+                        
+                        
+                    }
+                }
+                edit.addEventListener('click', e =>  {
+                    modal.classList.remove('hide');
+                    
+                    
+                });
+                
+            }
+            else {
+                edit.classList.add('hide');
+                
+            }   
+        });
+    }
+
+
 }
+    
+
 const myApp = new MyClass()

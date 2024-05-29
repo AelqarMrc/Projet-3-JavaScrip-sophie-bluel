@@ -9,7 +9,7 @@ export default class DOMClass {
     // static #privateStaticField = 0;
     works = []
     categories = []
-    //login = []
+
 
 
 
@@ -112,7 +112,7 @@ export default class DOMClass {
                 body: JSON.stringify((formData))
             });
             console.log(response);
-            
+
             // Si la requête est réussie, le serveur doit renvoyer un token
             if (response.ok === true) {
                 const { token } = await response.json();
@@ -123,14 +123,14 @@ export default class DOMClass {
                 // Rediriger l'utilisateur vers la page d'accueil
                 window.location.href = 'index.html';
                 console.log(localStorage);
-                
-                
+
+
             } else {
                 // Gérer les erreurs, par exemple en montrant un message à l'utilisateur
                 console.error('Login failed');
             }
 
-            
+
 
         });
     }
@@ -153,5 +153,48 @@ export default class DOMClass {
 
     }
 
+    galleryModal = (data) => {
+
+        let modal = document.querySelector("#modal1")
+        modal.innerHTML += `<div class="modalWrapper">
+            <h3 id="titreModal">Galerie Photo</h3>
+            <div id="imageContainer"></div>
+            <hr class="grey-line">
+            <form action="#" method="post" class="modal1">
+                <input type="submit" value="Ajouter Photo">
+            </form>
+        </div>`
+
+
+
+        data.forEach((item, i) => {
+            document.querySelector("#imageContainer").innerHTML +=
+                `<input type="image" src="${item.imageUrl}" width="60px" height="80px">`
+        });
+
+        const button = document.querySelector("#modal1 input[type=submit]")
+            , modal2 = document.querySelector("#modal2")
+        button.addEventListener("click", function (e) {
+            e.preventDefault()
+            modal.classList.add("hide")
+            modal2.classList.remove("hide")
+        })
+        let backButton = document.querySelector("#backButton");
+        backButton.addEventListener("click", function () {
+            modal1.classList.remove("hide");
+            let modal2 = document.querySelector("#modal2");
+            modal2.classList.add("hide");
+        });
+
+
+    }
+
+    //     addPhotosModal = () => {
+    // //         let addPhotos = document.querySelector("#addPhotos")
+
+    // //        let form = ``;
+
+    // //         addPhotos.innerHTML = form;
+    // //     }
 }
 
