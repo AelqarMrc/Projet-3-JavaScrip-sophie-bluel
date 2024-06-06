@@ -25,7 +25,9 @@ export default class APIClass extends DOMClass {
     getWorks(param) {
         fetch(this.#works_endpoint)
             .then(response => response.json())
-            .then(this.renderWorksCards)
+            .then(this.renderWorksCards,
+                this.galleryModal
+            )
             .catch(error => console.log(error));
     }
 

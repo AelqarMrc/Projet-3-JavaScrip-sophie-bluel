@@ -24,7 +24,7 @@ export default class MyClass extends APIClass{
         this.getLogged()
         this.test()
         this.getModaleCard()
-        // this.addPhotosModal()
+        this.addPhotosModal()
     }
     
     test = () => {

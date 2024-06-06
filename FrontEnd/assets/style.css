@@ -353,6 +353,24 @@ svg {
 	opacity: 0 !important;
 }
 
+#imageContainer{
+	padding-left: 2em;
+}
+
+.image-wrapper{
+	position: relative;
+}
+
+.deleteBoutton {
+    position: relative;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+	padding: 0;
+}
+
 /* Form */
 
 #contact {
@@ -472,9 +490,18 @@ input[type="submit"] {
 	padding: 0 2.5em;
 }
 
-#imageContainer{
-	padding-left: 2em;
+.modalWrapper img{
+	width: 80px;
+	height: 60px;
 }
+
+#modal2 form{
+	display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+
 
 #backButton {
     background: none;
@@ -484,6 +511,10 @@ input[type="submit"] {
     cursor: pointer;
     outline: inherit;
 }
+
+
+
+
 
 /* Footer */
 

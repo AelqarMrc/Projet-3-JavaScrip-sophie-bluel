@@ -27,7 +27,7 @@ export default class DOMClass {
         this.works = data
         data.forEach((item, i) => {
             document.querySelector(".gallery").innerHTML +=
-                `<figure data-category = "${item.category.name}">
+                `<figure data-category = "${item.category.name} id = "${item.id}"">
                 <img src="${item.imageUrl}" alt="Abajour Tahina">
                 <figcaption>${item.title}</figcaption>
                 </figure>`
@@ -158,7 +158,9 @@ export default class DOMClass {
         let modal = document.querySelector("#modal1")
         modal.innerHTML += `<div class="modalWrapper">
             <h3 id="titreModal">Galerie Photo</h3>
-            <div id="imageContainer"></div>
+            <div id="imageContainer">
+            <div class="image-wrapper"></div>
+            </div>
             <hr class="grey-line">
             <form action="#" method="post" class="modal1">
                 <input type="submit" value="Ajouter Photo">
@@ -168,8 +170,11 @@ export default class DOMClass {
 
 
         data.forEach((item, i) => {
-            document.querySelector("#imageContainer").innerHTML +=
-                `<input type="image" src="${item.imageUrl}" width="60px" height="80px">`
+            document.querySelector(".image-wrapper").innerHTML +=
+            `
+            <input type="image" src="${item.imageUrl}" width="60px" height="80px"> 
+            <button class="deleteBoutton" ><i class="fas fa-trash" data-id = ${item.id}></i></button>
+            `
         });
 
         const button = document.querySelector("#modal1 input[type=submit]")
@@ -187,15 +192,98 @@ export default class DOMClass {
 
         });
 
+        const deleteBoutton  = document.querySelectorAll('.deleteBoutton')
+        deleteBoutton.forEach( (item,i) => {
+            item.addEventListener('click', async e => {
+                const id=e.target.dataset.id
+                , token = localStorage.token
+                , requestParameters = {
+                    method: "DELETE"
+                    , headers:  {
+                        // "Content-Type": "application/json"
+                         "Authorization": `Bearer ${token}`
+                    }
+                }
+                console.log("http://localhost:5678/api/works/"+id)
+                console.log(requestParameters)
+                
+                let response = await fetch("http://localhost:5678/api/works/"+id, requestParameters)
+                
+                if (response.ok) { // check if HTTP status is 2xx
+                    let deletedWork = response.status !== 204 ? await response.json() : null;
+                    console.log(deletedWork)
+                } else {
+                    console.log('HTTP response not 2xx, check the API or network');
+                }
+            })
+        })
+
+        
 
     }
 
-    //     addPhotosModal = () => {
-    // //         let addPhotos = document.querySelector("#addPhotos")
+        addPhotosModal = () => {
+        let addPhotos = document.querySelector("#modal2")
 
-    // //        let form = ``;
+        let modal2 =  `
+        <div class = modalWrapper>
+        <button id="backButton"><i class="fas fa-arrow-left"></i></button>
+        <h3>Ajout photo</h3>
+        <form action="#">
+            <button id="addPhotos">
+                <p>+ Ajouter Photos</p>
+                <img src="" >
+                <input type="file" class="inputImg NoOpacity" accept="image/png, image/jpeg">
+            </button>
+            <label for="titre">Titre</label>
+            <input type="text" name="titre" id="titre">
+            <label for="categorie">Catégorie</label>
+            <select name="categorie" id="categorie">
+            <hr class="grey-line">
+            <input type="submit" value="Valider">
+        </form>
+        </div>
+    `;
+        addPhotos.innerHTML = modal2;
 
-    // //         addPhotos.innerHTML = form;
-    // //     }
+        let form = document.querySelector("#modal2 form");
+        const token = localStorage.token;
+        form.addEventListener("submit",  e => {
+            e.preventDefault(); 
+            
+            let formData = new FormData(form);
+            
+            fetch('http://localhost:5678/api/works', { 
+            method: 'POST',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', response));
+        console.log(form);
+    });
+    
+    let input = document.querySelector(".inputImg"); // Remplacez #yourInput par le sélecteur de votre input
+    let preview = document.querySelector("form img"); // Remplacez #yourPreview par le sélecteur de votre balise img
+    console.log(input);
+    console.log(preview);
+    
+    input.addEventListener("change", function () {
+        let file = this.files[0]; // Obtient le premier fichier sélectionné
+    
+        if (file) {
+            let reader = new FileReader();
+    
+            reader.addEventListener("load", function () {
+                preview.src = this.result; // Attribue le résultat de la lecture du fichier à la propriété src de la balise img
+            });
+    
+            reader.readAsDataURL(file); // Lit le fichier en tant que Data URL
+        }
+    }); 
+}
 }
 
