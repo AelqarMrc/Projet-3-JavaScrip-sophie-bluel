@@ -180,7 +180,7 @@ h2 {
     border-top: 1px solid grey; /* Ceci crée le trait gris */
     margin: 20px 0; /* Ceci ajoute de l'espace au-dessus et en dessous du trait */
 	height: 1px;
-	width: 25em;
+	width: 100%;
 }
 
 /* Edit Mode Bar */
@@ -475,7 +475,7 @@ input[type="submit"] {
 
 .modalWrapper h3{
 	font-size: 1.5em;
-	margin-top: 1.5em;
+
 	margin-bottom: 1em;
 }
 
@@ -492,18 +492,57 @@ input[type="submit"] {
 
 .modalWrapper img{
 	width: 80px;
-	height: 60px;
+	height: 80px;
 }
 
 #modal2 form{
 	display: flex;
     flex-direction: column;
     gap: 1em;
+	width: 75%;
 }
 
+.addPhotosDiv{
+    text-align: center;
+    display: flex;
+    background-color: #e8f1f6;
+    flex-direction: column;
+    align-items: center;
+	margin-bottom: 1em;
+}
+.addPhotosDiv svg{
+	color: #B9C5CC;
+}
+.addPhotosDiv svg, .addPhotosDiv img{
+	margin: 0.5em;
+	width: 80px;
+    margin: 0.5em;
 
+}
+.addPhotosDiv label{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 10em;
+	height: 3em;
+	background-color: #B9C5CC;
+}
+
+#submit{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modalHeader{
+	display: flex;
+    width: 95%;
+    justify-content: space-between;
+    margin-top: 0.5EM;
+}
 
 #backButton {
+	position: relative;
     background: none;
     color: inherit;
     border: none;
