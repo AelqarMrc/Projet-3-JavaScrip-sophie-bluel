@@ -355,14 +355,24 @@ svg {
 
 #imageContainer{
 	padding-left: 2em;
+	display: flex;
+    flex-flow: wrap;
+
 }
 
 .image-wrapper{
 	position: relative;
+	max-width: 60px;
+    max-height: 80px;
+    margin: 1em;
+}
+
+.image-wrapper input{
+	width: 100%;
 }
 
 .deleteBoutton {
-    position: relative;
+    position: absolute;
     top: 0;
     right: 0;
     background: transparent;
@@ -370,6 +380,9 @@ svg {
     cursor: pointer;
 	padding: 0;
 }
+
+
+
 
 /* Form */
 

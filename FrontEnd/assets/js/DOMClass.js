@@ -27,7 +27,7 @@ export default class DOMClass {
         this.works = data
         data.forEach((item, i) => {
             document.querySelector(".gallery").innerHTML +=
-                `<figure data-category = "${item.category.name} id = "${item.id}"">
+                `<figure data-category = "${item.category.name}" id = "${item.id}"">
                 <img src="${item.imageUrl}" alt="Abajour Tahina">
                 <figcaption>${item.title}</figcaption>
                 </figure>`
@@ -36,14 +36,15 @@ export default class DOMClass {
 
     // renderFilterGallery(categories){
     renderFilterGallery = (data) => {
-        //console.log(this.works)
+        
+        this.addPhotosModal(data)
         this.categories = data
         this.works = data
         data.unshift({ name: "Tous" });
         data.forEach((item, i) => {
             document.querySelector(".filterBtn").innerHTML +=
-                `<button>${item.name}</button>`
-        });
+            `<button>${item.name}</button>`
+            });
     };
 
 
@@ -57,7 +58,7 @@ export default class DOMClass {
 
         filters.forEach(filter => {
             filter.addEventListener("click", function (e) {
-
+            
                 works.forEach((work, i) => {
                     work.classList.remove("hide")
                 })
@@ -159,8 +160,6 @@ export default class DOMClass {
         modal.innerHTML += `<div class="modalWrapper">
             <h3 id="titreModal">Galerie Photo</h3>
             <div id="imageContainer">
-            <div class="image-wrapper"></div>
-            <hr class="grey-line">
             </div>
             <form action="#" method="post" class="modal1">
                 <input type="submit" value="Ajouter Photo">
@@ -170,12 +169,13 @@ export default class DOMClass {
 
 
         data.forEach((item, i) => {
-            document.querySelector(".image-wrapper").innerHTML +=
-            `
-            <input type="image" src="${item.imageUrl}" width="60px" height="80px"> 
+            document.querySelector("#imageContainer").innerHTML +=
+                `<div class="image-wrapper">
+            <input type="image" src="${item.imageUrl}" width="100%" > 
             <button class="deleteBoutton" ><i class="fas fa-trash" data-id = ${item.id}></i></button>
-            `
+            </div>`
         });
+        document.querySelector("#imageContainer").innerHTML += `<hr class="grey-line">`
 
         const button = document.querySelector("#modal1 input[type=submit]")
             , modal2 = document.querySelector("#modal2")
@@ -223,8 +223,13 @@ export default class DOMClass {
     }
 
     addPhotosModal = (data) => {
-    
-        document.querySelector("#modal2").innerHTML +=`
+        this.categories = data
+
+
+        // Ajout de la modal pour ajouter des travaux
+
+
+        document.querySelector("#modal2").innerHTML += `
         <div class = modalWrapper>
         
         <div class ="modalHeader">
@@ -232,6 +237,9 @@ export default class DOMClass {
         </div>
         
         <h3>Ajout photo</h3>
+
+        
+
         <form action="#">
             
             <div class="addPhotosDiv">
@@ -239,14 +247,14 @@ export default class DOMClass {
                 <img src="" class = "hide">
                 <label id="addPhotos">
                 <p>+ Ajouter Photos</p>
-                <input type="file" class="inputImg NoOpacity" accept="image/png, image/jpeg">
+                <input name="image" type="file" class="inputImg NoOpacity" accept="image/png, image/jpeg">
                 </label>
                 </div>
                 
-                <label for="titre">Titre</label>
-                <input type="text" name="titre" id="titre">
-                <label for="categorie">Catégorie</label>
-                <select name="categorie" class="selectCategorie"></select>
+                <label for="title">Titre</label>
+                <input type="text" name="title" id="title">
+                <label for="category">Catégorie</label>
+                <select name="category" class="selectCategorie"></select>
                 <hr class="grey-line">
                 
                 <span id="submit">
@@ -255,58 +263,74 @@ export default class DOMClass {
                 </form>
                 </div>
                 `;
-                
-                // data.forEach((item, i) => {
-                //     document.querySelector("#modal2 select").innerHTML += `<option value="${item.id}">${item.name}</option>`
-                // });    
-                
 
-                const image = document.querySelector(".addPhotosDiv img")
-                , picture = document.querySelector(".addPhotosDiv svg");
-                
-                
-                let form = document.querySelector("#modal2 form");
-                const token = localStorage.token;
-                form.addEventListener("submit", e => {
-                    e.preventDefault();
+            data.forEach((item, i) => {
+             document.querySelector("#modal2 select").innerHTML += `<option value="${item.id}">${item.name}</option>`
+            });    
+
+        
+        // initialisation des variables
+
+
+        const token = localStorage.token
+        , image = document.querySelector(".addPhotosDiv img")
+        , picture = document.querySelector(".addPhotosDiv svg")
+        let form = document.querySelector("#modal2 form")
+        let input = document.querySelector(".inputImg")
+        , preview = document.querySelector("form img")
+        console.log(token);
+
+        
+        // Ecouteur d'événements pour l'envoi du formulaire au backend
+
+
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+
+            let formData = new FormData(form);
+            
+
+            const result = fetch('http://localhost:5678/api/works', {
+                method: 'POST',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Accept": "application/json",
                     
-                    let formData = new FormData(form);
                     
-                fetch('http://localhost:5678/api/works', {
-                    method: 'POST',
-                    headers: {
-                        "Authorization": `Bearer ${token}`
-                        },
-                        body: formData
-                        })
-                        .then(response => response.json())
-                        .catch(error => console.error('Error:', error))
-                        .then(response => console.log('Success:', response));
-                        console.log(form);
-                        });
-                        
-                        let input = document.querySelector(".inputImg"); // Remplacez #yourInput par le sélecteur de votre input
-                        let preview = document.querySelector("form img"); // Remplacez #yourPreview par le sélecteur de votre balise img
-                        console.log(input);
-                        console.log(preview);
-                        
-                        input.addEventListener("change", function () {
-                            let file = this.files[0]; // Obtient le premier fichier sélectionné
-                            
-                            if (file) {
-                                let reader = new FileReader();
-                                
-                                reader.addEventListener("load", function () {
-                                    preview.src = this.result; // Attribue le résultat de la lecture du fichier à la propriété src de la balise img
-                                    });
-                                    
-                                    reader.readAsDataURL(file); // Lit le fichier en tant que Data URL
-                                    image.classList.remove("hide");
-                                    picture.classList.add("hide");
-                                    document.querySelector("#addPhotos").classList.add("hide");
-                                    }
-                                    });
-                                    }
-                                    }
-                                    
-                                    
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(json => {
+                console.log('Success:', json);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+            
+        });
+        
+
+
+        // Ecouteur d'événements pour l'affichage de l'image sélectionnée
+        
+        
+        input.addEventListener("change", function () {  
+            let file = this.files[0]; // Obtient le premier fichier sélectionné
+
+            if (file) {
+                let reader = new FileReader();
+
+                reader.addEventListener("load", function () {
+                    preview.src = this.result; // Attribue le résultat de la lecture du fichier à la propriété src de la balise img
+                });
+
+                reader.readAsDataURL(file); // Lit le fichier en tant que Data URL
+                image.classList.remove("hide");
+                picture.classList.add("hide");
+                document.querySelector("#addPhotos").classList.add("hide");
+            }
+        });
+    }
+}
+

@@ -34,7 +34,7 @@ export default class APIClass extends DOMClass {
     getCategories(param) {
         fetch(this.#categories_endpoint)
             .then(response => response.json())
-            .then(this.renderFilterGallery, this.addPhotosModal)
+            .then(this.renderFilterGallery)
             .catch(error => console.log(error));
 
     }
