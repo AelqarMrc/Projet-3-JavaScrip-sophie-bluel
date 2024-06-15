@@ -162,7 +162,7 @@ export default class DOMClass {
             <div id="imageContainer">
             </div>
             <form action="#" method="post" class="modal1">
-                <input type="submit" value="Ajouter Photo">
+                <input type="submit" value="Ajouter Photo" class="submit">
             </form>
         </div>`
 
