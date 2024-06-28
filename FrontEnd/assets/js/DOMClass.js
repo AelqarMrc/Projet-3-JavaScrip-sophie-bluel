@@ -207,17 +207,19 @@ export default class DOMClass {
                 console.log("http://localhost:5678/api/works/" + id)
                 console.log(requestParameters)
 
-                let response = await fetch("http://localhost:5678/api/works/" + id, requestParameters)
+            try {
+                let response = await fetch(`http://localhost:5678/api/works/${id}`, requestParameters);
 
-                if (response.ok) { // check if HTTP status is 2xx
-                    let deletedWork = response.status !== 204 ? await response.json() : null;
-                    console.log(deletedWork)
+                if (response.ok) {
+                    e.target.closest('.image-wrapper').remove();
                 } else {
-                    console.log('HTTP response not 2xx, check the API or network');
+                    console.error('HTTP response not 2xx, check the API or network');
                 }
-            })
+            } catch (error) {
+                console.error('Error during fetch operation:', error);
+            }
         })
-
+    });
 
 
     }
@@ -258,7 +260,7 @@ export default class DOMClass {
                 <hr class="grey-line">
                 
                 <span id="submit">
-                <input type="submit" value="Valider">
+                <input type="submit" value="Valider" class="submit">
                 </span>
                 </form>
                 </div>
@@ -302,6 +304,18 @@ export default class DOMClass {
             })
             .then(response => response.json())
             .then(json => {
+                const works = document.querySelector(".gallery")
+                
+                const newWork = document.createElement("figure")
+                newWork.innerHTML = `<img src="${json.imageUrl}" alt="${json.title}">`
+                newWork.innerHTML += `<figcaption>${json.title}</figcaption>`
+                newWork.dataset.category = json.category
+                newWork.id = json.id
+                works.appendChild(newWork)
+
+                const modal = document.querySelector("#modal2")
+                modal.classList.add("hide")
+                
                 console.log('Success:', json);
             })
             .catch((error) => {
