@@ -412,6 +412,10 @@ svg {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+#contact input[type="submit"] {
+	width: 180px;
+	
+}
 
 input[type="submit"] {
 	font-family: 'Syne';
@@ -419,7 +423,7 @@ input[type="submit"] {
 	color: white;
 	background-color: #1D6154;
 	margin: 2em auto;
-	width: 180px;
+	padding: 0.8em 3em;	
 	text-align: center;
 	border-radius: 60px;
 }
@@ -454,7 +458,7 @@ input[type="submit"] {
     flex-direction: column;
     gap: 1em;
     margin: 0;
-    padding: 1em;
+    padding: 1em 1em;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
@@ -468,14 +472,10 @@ input[type="submit"] {
 
 
 .modalWrapper input {
-	gap: 1em;
 	margin: 0;
 	border: none;
 }
-.submit{
-	padding: 0.5em;
 
-}
 
 
 .modalWrapper form{
@@ -486,6 +486,17 @@ input[type="submit"] {
 	width: 80px;
 	height: 80px;
 }
+.deleteBoutton img{
+	margin-right: 3px;
+	margin-top: 5px;
+	width: 17px;
+	height: 17px;
+}
+
+#modal2 .modalWrapper{
+	padding-top: 2em;
+	padding-bottom: 4em;
+}
 
 #modal2 form{
 	display: flex;
@@ -494,11 +505,27 @@ input[type="submit"] {
 	width: 75%;
 }
 
+#modal2 input, select{
+	height: 40px;
+	font-size: 1.1em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#modal2 input.submit{
+	padding: 0em 6em;
+	font-size: 1.1em;
+}
 
 #imageContainer{
 	display: flex;
     flex-flow: wrap;
-    width: 67%;
+	width: 67%;
+   
+}
+#image-wrapper{
+	display: flex;
+	flex-flow: wrap;
 	GAP: 0.5EM;
     padding-bottom: 0px;
 }
@@ -534,6 +561,8 @@ input[type="submit"] {
     flex-direction: column;
     align-items: center;
 	margin-bottom: 1em;
+	padding: 1em;
+	gap: 0.5em;
 }
 .addPhotosDiv svg{
 	color: #B9C5CC;
@@ -544,13 +573,32 @@ input[type="submit"] {
     margin: 0.5em;
 
 }
-.addPhotosDiv label{
+.addPhotosDiv label {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
-	width: 10em;
-	height: 3em;
-	background-color: #B9C5CC;
+	width: 173px;
+	height: 36px;
+	left: 633px;
+	top: 881px;
+	background: #CBD6DC;
+	border-radius: 50px;
+}
+#addPhotos input[type="file"]{
+	height: 0;
+	width: 0;
+}
+
+#addPhotos p{
+	font-size: 0.8em;
+}
+
+#addPhotos h3{
+	font-size: 1em;
+	font-family: Work Sans;
+	color:#306685;
+	margin: 0;
 }
 
 #submit{
@@ -564,9 +612,10 @@ input[type="submit"] {
     width: 95%;
     justify-content: space-between;
     margin-top: 0.5EM;
+	text-align: right;
 }
 
-#backButton {
+#backButton{
 	position: relative;
     background: none;
     color: inherit;
@@ -575,7 +624,10 @@ input[type="submit"] {
     cursor: pointer;
     outline: inherit;
 }
-
+.closeButton{
+	background: none;
+	border: none;
+}
 
 
 
